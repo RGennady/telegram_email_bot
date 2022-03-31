@@ -49,7 +49,7 @@ app.post('/sendMessage', function (req, res){
 });
 
 async function sendMail(headerMail,text,email,isClient){
- 
+  var attachments = [];
    let transporter = nodemailer.createTransport({
     host: "smtp.yandex.ru",
     port: 465,
@@ -60,24 +60,16 @@ async function sendMail(headerMail,text,email,isClient){
     }
   });
   if(isClient==true){
-    var attachments = [{ filename: 'price.pdf', path: __dirname + '/pdf/price.pdf', contentType: 'application/pdf' }];
-    let info = await transporter.sendMail({
-    from: 'email', 
-    to: email, 
-    subject: headerMail, 
-    html:  html 
-    });
-  }
-  else{
-    let info = await transporter.sendMail({
+     attachments = [{ filename: 'price.pdf', path: __dirname + '/pdf/price.pdf', contentType: 'application/pdf' }];
+   }
+   let info = await transporter.sendMail({
     from: 'email', 
     to: email, 
     subject: headerMail, 
     attachments: attachments,
     html:  html 
     });
-  }
-} 
+ } 
 
 
 app.listen(3000);
