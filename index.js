@@ -26,7 +26,7 @@ app.post('/sendMessage', function (req, res){
      let phone=req.body.phone;
      let comment=req.body.comment;
      
-     if((typeof name !== 'undefined')||(typeof phone !=='undefined')||(typeof comment !=='undefined')){
+     if((typeof name !== 'undefined')&&(typeof phone !=='undefined')&&(typeof comment !=='undefined')){
          let headerMail="Сообщение с сайта";
          let message ="<b>Клиент:</b>"+name+",\n<b>Телефон:</b>"+phone+",\n<b>Комментарий:</b>"+comment;
          bot.sendMessage(chatId,message,{parse_mode: 'HTML'});  
